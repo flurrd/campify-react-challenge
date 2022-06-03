@@ -1,0 +1,8 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.fontLigatures": true,
+    "editor.suggestSelection": "recentlyUsed",
+    "javascript.suggest.autoImports": true,
+    "javascript.suggest.paths": true,
+}
