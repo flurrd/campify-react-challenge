@@ -5,4 +5,10 @@
     "editor.suggestSelection": "recentlyUsed",
     "javascript.suggest.autoImports": true,
     "javascript.suggest.paths": true,
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
 }
