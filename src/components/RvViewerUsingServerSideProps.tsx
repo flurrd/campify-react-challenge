@@ -1,11 +1,13 @@
 import useSWR from 'swr'
 import React, { useState, useEffect } from 'react'
 import map from 'lodash/map';
+import Link from 'next/link'
+
 import styled from "styled-components";
 import { breakpoints, colors, spacings } from "@/styled/tokens";
 import { Rv, RV_TYPES } from "@/types/rvs";
 import RvCardItem from './RvCardItem';
-import Spinner from './Spinner';
+
 
 
 const Container = styled.section`
@@ -13,16 +15,14 @@ const Container = styled.section`
   padding-right: ${spacings("2")};
 `;
 
-const FilterButton = styled.button`
+const Button = styled.a`
   padding: ${spacings("BASE")} ${spacings("3")};
   background: ${colors("BRAND.PRIMARY.DARK")};
   display: inline-flex;
   margin-right: ${spacings("BASE")};
   color: white;
-  border-radius: 1rem;
+  border-radius: 4px;
   cursor: pointer;
-  border: none;
-  text-transform: capitalize;
 `;
 
 const RvGrid = styled.section`
@@ -46,36 +46,25 @@ const RvGrid = styled.section`
   }
   `;
 
-const fetcher = (url: any) => fetch(url).then((res) => res.json())
 
-const RvViewer = () => {
-
-  const [fetchUrl, setFetchUrl] = React.useState('/api/rvs/');
-  const { data, error } = useSWR(String(fetchUrl), fetcher);
-  const [clickedButton, setClickedButton] = useState('');
-
-  const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    const button: HTMLButtonElement = event.currentTarget;
-    setClickedButton(button.name);
-    setFetchUrl('/api/' + button.name);
-  };
-
-  if (error) return <div>Sorry, error loading content</div>
-  if (!data) return <Spinner />
-  if (data.length === 0) return <div>Sorry, no results found</div>
+const RvViewer = (posts: any) => {
 
   return (
     <Container>
-      {map(RV_TYPES, (value, i) => (
-
-        <FilterButton key={i} onClick={buttonHandler} name={value}>
-          {value}
-        </FilterButton>
+      {map(RV_TYPES, (value, key) => (
+        <Link
+          key={key}
+          href={{
+            pathname: '/',
+            query: { type: value },
+          }}
+        >
+          <Button>{value}</Button>
+        </Link>
       ))}
 
       <RvGrid>
-        {data.map((rv: Rv, i: any) => (
+        {posts.props.map((rv: Rv, i: any) => (
           <RvCardItem rv={rv} key={i} />
         ))}
       </RvGrid>

@@ -4,5 +4,5 @@ import styled from "styled-components";
 export const Main = styled.main`
   display: flex;
   flex-direction: column;
-  padding-top: ${spacings(6)};
+  padding-top: ${spacings(3)};
 `;

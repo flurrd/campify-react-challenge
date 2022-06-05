@@ -24,8 +24,9 @@ const RvContent = styled.div`
 const RvName = styled.h3`
   color: ${colors("BRAND.PRIMARY.DARK")};
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-top:0;
+  margin-bottom:0.3rem;
 `;
 
 const RvLocation = styled.div`
@@ -41,7 +42,7 @@ const RvCardItem = (props: any) => {
 
     return (
 
-        <RvCardWrap key={props.key} href="#">
+        <RvCardWrap href="#">
             <RvImg src={props.rv.attributes.coverImage}></RvImg>
             <RvContent>
                 <RvName>{props.rv.attributes.name}</RvName>
