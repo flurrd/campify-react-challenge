@@ -13,11 +13,22 @@ const Container = styled.section`
   padding-right: ${spacings("2")};
 `;
 
+const LoadingMessage = styled.section`
+  text-align: center;
+`;
+
+const Filter = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+
 const FilterButton = styled.button`
   padding: ${spacings("BASE")} ${spacings("3")};
   background: ${colors("BRAND.PRIMARY.DARK")};
   display: inline-flex;
-  margin-right: ${spacings("BASE")};
+  margin-left: ${spacings("BASE")};
   color: white;
   border-radius: 1rem;
   cursor: pointer;
@@ -61,18 +72,22 @@ const RvViewer = () => {
     setFetchUrl('/api/' + button.name);
   };
 
-  if (error) return <div>Sorry, error loading content</div>
+  if (error) return <LoadingMessage>Sorry, something went wrong</LoadingMessage>
   if (!data) return <Spinner />
-  if (data.length === 0) return <div>Sorry, no results found</div>
+  if (data.length === 0) return <LoadingMessage>Sorry, no results found</LoadingMessage>
 
   return (
     <Container>
-      {map(RV_TYPES, (value, i) => (
 
-        <FilterButton key={i} onClick={buttonHandler} name={value}>
-          {value}
-        </FilterButton>
-      ))}
+
+      <Filter>
+        <div>Filter by type: </div>
+        {map(RV_TYPES, (value, i) => (
+          <FilterButton key={i} onClick={buttonHandler} name={value}>
+            {value}
+          </FilterButton>
+        ))}
+      </Filter>
 
       <RvGrid>
         {data.map((rv: Rv, i: any) => (

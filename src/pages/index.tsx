@@ -10,6 +10,7 @@ const RvViewerPage = () => {
     <Page>
       <Navbar />
       <Main>
+        <h1>RV Viewer</h1>
         <RvViewer></RvViewer>
         {/* <RvViewerUsingServerSideProps props={props.rvItems} /> */}
       </Main>
