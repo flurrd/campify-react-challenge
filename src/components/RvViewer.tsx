@@ -8,10 +8,13 @@ import { Rv, RV_TYPES } from "@/types/rvs";
 import RvCardItem from './RvCardItem';
 
 const Container = styled.section`
-  padding: ${spacings("2")};
+  padding-left: ${spacings("2")};
+  padding-right: ${spacings("2")};
 `;
 
 const RvGrid = styled.section`
+  padding-top: ${spacings("2")};
+  padding-bottom: ${spacings("2")};
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: ${spacings("2")};
