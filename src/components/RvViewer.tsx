@@ -7,9 +7,29 @@ import { breakpoints, colors, spacings } from "@/styled/tokens";
 import { Rv, RV_TYPES } from "@/types/rvs";
 import RvCardItem from './RvCardItem';
 
-const Container = styled.div`
+const Container = styled.section`
   padding: ${spacings("2")};
 `;
+
+const RvGrid = styled.section`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: ${spacings("2")};
+  grid-row-gap: ${spacings("2")};
+  @media (min-width:  ${breakpoints("SM")}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width:  ${breakpoints("MD")}) {
+    grid-template-columns:  repeat(3, 1fr);
+  }
+  @media (min-width:  ${breakpoints("LG")}) {
+    grid-template-columns:  repeat(4, 1fr);
+  }
+  @media (min-width:  ${breakpoints("XL")}) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  `;
+
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json())
 
@@ -35,22 +55,13 @@ const RvViewer = () => {
                     <option value={key} key={key}>{value}</option>
                 ))}
             </select>
+            <RvGrid>
+                {data.map((rv: Rv, i: any) => (
+                    <RvCardItem rv={rv} key={i} />
+                ))}
 
 
-            {data.map((rv: Rv, i: any) => (
-                <article key={i}>
-                    <h3>{rv.attributes.name}</h3>
-                    <p>{rv.attributes.location}</p>
-                    <p>{rv.vanType}</p>
-                    <p>{rv.listing}</p>
-                    <img src={rv.attributes.coverImage}></img>
-                </article>
-            ))}
-
-            {/*             
-            {data.map((rv: Rv, i: any) => (
-                <RvCardItem data={rv} />
-            ))} */}
+            </RvGrid>
 
 
         </Container>
